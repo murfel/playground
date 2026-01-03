@@ -69,9 +69,9 @@ module Parallel = struct
   ;;
 
   let%bench_fun "parallel" =
-    let domains = Sys.getenv "DOMAINS" |> Option.bind ~f:Int.of_string_opt in
+    let max_domains = Sys.getenv "DOMAINS" |> Option.bind ~f:Int.of_string_opt in
     let scheduler =
-      (Parallel_scheduler.create [@alert "-experimental"]) ?domains ()
+      (Parallel_scheduler.create [@alert "-experimental"]) ?max_domains ()
     in
     let (P key) = Capsule.create () in
     let mutex = Mutex.create key in
